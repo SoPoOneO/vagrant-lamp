@@ -5,7 +5,7 @@ PASSWORD='12345678'
 PROJECTFOLDER='public'
 
 # create project folder
-sudo mkdir "/var/www/html/${PROJECTFOLDER}"
+sudo mkdir "/var/www/${PROJECTFOLDER}"
 
 # update / upgrade
 sudo apt-get update
@@ -15,6 +15,9 @@ sudo apt-get -y upgrade
 sudo apt-get install -y apache2
 sudo apt-get install -y php5
 
+# remove default apache home directory
+sudo rm -rf /var/www/html
+
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password_again password $PASSWORD"
@@ -22,8 +25,8 @@ sudo apt-get -y install mysql-server
 sudo apt-get install php5-mysql
 
 # mcrypt
-sudo apt-get install mcrypt
-sudo apt-get install php5-mcrypt
+sudo apt-get -y install mcrypt
+sudo apt-get -y install php5-mcrypt
 sudo php5enmod mcrypt
 
 # install phpmyadmin and give password(s) to installer
@@ -38,8 +41,8 @@ sudo apt-get -y install phpmyadmin
 # setup hosts file
 VHOST=$(cat <<EOF
 <VirtualHost *:80>
-    DocumentRoot "/var/www/html/${PROJECTFOLDER}"
-    <Directory "/var/www/html/${PROJECTFOLDER}">
+    DocumentRoot "/var/www/${PROJECTFOLDER}"
+    <Directory "/var/www/${PROJECTFOLDER}">
         AllowOverride All
         Require all granted
     </Directory>
