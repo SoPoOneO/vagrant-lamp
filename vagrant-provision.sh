@@ -17,7 +17,7 @@ sudo apt-get install -y php5
 
 # alter some things apache sets up by default
 sudo rm -rf /var/www/html
-sudo sed -i 'liServerName localhost' /etc/apache2/apache2.conf
+sudo sed -i '1iServerName localhost' /etc/apache2/apache2.conf
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
