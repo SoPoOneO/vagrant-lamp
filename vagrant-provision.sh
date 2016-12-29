@@ -15,8 +15,9 @@ sudo apt-get -y upgrade
 sudo apt-get install -y apache2
 sudo apt-get install -y php5
 
-# remove default apache home directory
+# alter some things apache sets up by default
 sudo rm -rf /var/www/html
+sudo sed -i 'liServerName localhost' /etc/apache2/apache2.conf
 
 # install mysql and give password to installer
 sudo debconf-set-selections <<< "mysql-server mysql-server/root_password password $PASSWORD"
