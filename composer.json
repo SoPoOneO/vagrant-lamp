@@ -5,7 +5,10 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"zizaco/entrust": "1.2.*@dev"
+		"zizaco/entrust": "1.2.*@dev",
+		"barryvdh/laravel-debugbar": "~1.8"
+	},
+	"require-dev": {
 	},
 	"autoload": {
 		"classmap": [
