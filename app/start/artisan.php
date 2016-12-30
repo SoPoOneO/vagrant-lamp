@@ -11,3 +11,6 @@
 |
 */
 
+Artisan::add(new DatabaseClearCommand);
+
+Artisan::add(new ReupCommand);
