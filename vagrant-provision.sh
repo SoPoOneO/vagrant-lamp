@@ -69,7 +69,7 @@ curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 # run composer
-cd /var/www && composer install
+cd /var/www && composer install --no-progress
 
 # copy config files
 cp /var/www/app/config/local/example_app.php /var/www/app/config/local/app.php 
