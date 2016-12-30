@@ -39,6 +39,9 @@ sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password $
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2"
 sudo apt-get -y install phpmyadmin
 
+# get database set up
+mysql -u root --password=$PASSWORD -e "create schema laravel"
+
 # setup hosts file
 VHOST=$(cat <<EOF
 <VirtualHost *:80>
@@ -61,9 +64,13 @@ service apache2 restart
 # install git
 sudo apt-get -y install git
 
+# copy config files
+cp /var/www/app/config/local/example_app.php /var/www/app/config/local/app.php 
+cp /var/www/app/config/local/example_database.php /var/www/app/config/local/database.php 
+
 # install Composer
 curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
 # get php app dependencies installed
-cd /var/www && composer install
+cd /var/www && php artisan migrate && php artisan db:seed
