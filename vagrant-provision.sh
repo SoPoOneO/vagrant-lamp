@@ -68,9 +68,12 @@ sudo apt-get -y install git
 curl -s https://getcomposer.org/installer | php
 mv composer.phar /usr/local/bin/composer
 
+# run composer
+cd /var/www && composer install
+
 # copy config files
 cp /var/www/app/config/local/example_app.php /var/www/app/config/local/app.php 
 cp /var/www/app/config/local/example_database.php /var/www/app/config/local/database.php 
 
-# get php app dependencies installed
+# get php app database set up and populated with dummy
 cd /var/www && php artisan reup
